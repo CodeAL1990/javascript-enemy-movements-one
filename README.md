@@ -33,5 +33,23 @@ Create new properties called spriteWidth and spriteHeight inside the constructor
 Since we can use up to 9 parameters in drawImage, you can crop out the image you are using inside the strokeRect method to only 1 by specifying with additional parameters(refer to spriteAnimation js for this) for sx sy sw and sh
 Using hardcoded values for width and height will squeeze the much larger width and height of the sprites insde the boxes
 Move the width and height of the constructor below sprite width and height and assign them to the width and height of the sprite to get the original size back
-Divide assigned values of the width and height by lets say 3 to get a smaller aspect ratio
-//TBC
+Divide assigned values of the width and height by a number to get a smaller aspect ratio
+Create a new property in constructor called frame and set it to 0
+Replace the hardcoded 0 in sx of drawImage to frame \* spriteWidth to display different images along the row of the png at different frames at each frame numeral
+To have the frame go 01234 and back to 0, add a ternary operator in update where if the frame reaches 4, reset it back to 0, otherwise increase it by 1 constantly
+To slow down the animation, add a global variable called gameFrame and set it to 0;
+Add an increment operator for gameFrame after the forEach loop in animate
+Add an if condition when gameFrame modulus 2 equals 0 is true(this means for every 2 gameFrame, invoke the function in the condition)
+Move the ternary operator inside the if condition
+Create a new property inside the constructor called flapSpeed
+Set it to Math.random between 1 and 4 (Math.random() \* 3 + 1)
+Instead of a modulus of hardcoded 2, use the randomised flapSpeed instead to randomise flapSpeed
+Wrap flapSpeed property with Math.floor because Math.random of any number will give u a range in decimals which will not work with modulus
+Remove the strokeRect or fillRect (whichever you used) in draw to remove the rectangle around the sprite
+Instead of putting enemyImage and source at the global scope, you can put it inside the Enemy class as a local scope
+Move them to the Enemy class and use the this keyword instead (using a generic image as variable instead of enemyImage)
+In draw, replace enemyImage with this.image which you just made
+Comment out this.speed in constructor and replace this.speed in both x and y in update with Math.random \* number - number like you did before
+To make sure the sprites stay within canvas, add a - this.width to the calculation of x and y in the constructor and move it below the width and height calculation so that x and y can obtain the value in width and height
+Put parenthesis for canvas.width - this.width so that javascript calculates that value first(if you don't it starts the calculation at negative width), do the same in y for height
+You can change the values beside Math.random of x and y in update to get the type of 'jitter' you want (always have the last number as 2x of the previous number or the sprite will just 'fly' away)
